@@ -1,19 +1,16 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Customer Details - Derick Veliz admin
+    All Customer Details - {{ env('APP_NAME') }}
 @endsection
 @push('styles')
-<style>
-    .dataTables_filter{
-        margin-bottom: 10px !important;
-    }
-</style>
+    <style>
+        .dataTables_filter {
+            margin-bottom: 10px !important;
+        }
+    </style>
 @endpush
 
 @section('content')
-    @php
-        use App\Models\User;
-    @endphp
     <section id="loading">
         <div id="loading-content"></div>
     </section>
@@ -31,8 +28,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('customers.create') }}" class="btn add-btn" ><i
-                                class="fa fa-plus"></i> Add a Customer</a>
+                        <a href="{{ route('customers.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Customer</a>
                     </div>
                 </div>
             </div>
@@ -83,9 +80,11 @@
                                         </td>
                                         <td>
                                             <a title="Edit Customer" data-route=""
-                                                href="{{ route('customers.edit', $customer->id) }}"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;
+                                                href="{{ route('customers.edit', $customer->id) }}"><i
+                                                    class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Customer" data-route="{{ route('customers.delete', $customer->id) }}"
+                                            <a title="Delete Customer"
+                                                data-route="{{ route('customers.delete', $customer->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -109,11 +108,11 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [6,7]
+                        "targets": [6, 7]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1, 2, 3, 4 ,5 ]
+                        "targets": [0, 1, 2, 3, 4, 5]
                     }
                 ]
             });
@@ -146,11 +145,11 @@
         $('.toggle-class').change(function() {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var user_id = $(this).data('id');
-    
+
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{route("customers.change-status")}}',
+                url: '{{ route('customers.change-status') }}',
                 data: {
                     'status': status,
                     'user_id': user_id

@@ -1,13 +1,10 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Admin Details - Derick Veliz admin
+    All Admin Details - {{env('APP_NAME')}}
 @endsection
 
 
 @section('content')
-@php
-    use App\Models\User;
-@endphp
     <section id="loading">
         <div id="loading-content"></div>
     </section>
