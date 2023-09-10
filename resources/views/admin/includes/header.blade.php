@@ -2,12 +2,12 @@
     <div class="header">
         <div class="header-left">
             <a href="javascript:void(0);" class="logo">
-                {{-- <img src="{{ asset('admin_assets/img/logo2.png') }}" width="40" height="40" alt=""> --}}
-                <h2>Demo</h2> 
+                <img src="{{ asset('admin_assets/img/logo2.png') }}" width="40" height="40" alt="">
+                {{-- <h2>{{env('APP_NAME')}}</h2>  --}}
             </a>
             <a href="javascript:void(0);" class="logo2">
-                {{-- <img src="{{ asset('admin_assets/img/logo2.png') }}" width="40" height="40" alt=""> --}}
-              <h2>Demo</h2>  
+                <img src="{{ asset('admin_assets/img/logo2.png') }}" width="40" height="40" alt="">
+              {{-- <h2>{{env('APP_NAME')}}</h2>   --}}
             </a>
         </div>
         <a id="toggle_btn" href="javascript:void(0);">
@@ -29,7 +29,7 @@
                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                     <span class="user-img"> @if(Auth::user()->profile_picture) <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt=""> @else <img src="{{ asset("admin_assets/img/profiles/avatar-21.jpg") }}" alt=""> @endif
                         <span class="status online"></span></span>
-                    <span>Admin</span>
+                    <span>{{Auth::user()->name}}</span>
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{ route('admin.profile') }}">My Profile</a>

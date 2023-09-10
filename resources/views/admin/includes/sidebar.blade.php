@@ -2,13 +2,14 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul class="sidebar-vertical">
+                <li class="menu-title">
+                    <span>Main</span>
+                </li>
                 <li class="{{ Request::is('admin/dashboard*') ? 'active' : ' ' }}">
                     <a href="{{ route('admin.dashboard') }}" ><i class="la la-dashboard"></i> <span>Dashboard</span></a>                 
                 </li>
                 
-                <li class="menu-title">
-                    <span>Main</span>
-                </li>
+                
 
                 <li class="submenu">
                     <a href="#" class="{{ Request::is('admin/profile*') || Request::is('admin/password*') || Request::is('admin/detail*') ? 'active' : ' ' }}"><i class="la la-user-cog"></i> <span>Manage Account </span> <span
@@ -19,18 +20,18 @@
                         </li>
                         <li class="{{ Request::is('admin/password*') ? 'active' : ' ' }}">
                             <a href="{{ route('admin.password') }}">Change Password</a>
-                        </li>
-                        <li class="{{ Request::is('admin/detail*') ? 'active' : ' ' }}">
-                            <a href="{{ route('admin.index') }}">Admin List</a>
-                        </li>                     
+                        </li>                  
                     </ul>
                 </li>
-                <li class="{{ Request::is('admin/customers*') ? 'active' : ' ' }}">
-                    <a href="{{ route('customers.index') }}" ><i class="la la-users"></i> <span>Manage Customers</span></a>                 
+                <li class="menu-title">
+                    <span>User Management</span>
+                </li>
+                <li class="{{ Request::is('admin/users*') ? 'active' : ' ' }}">
+                    <a href="{{ route('users.index') }}" ><i class="la la-users"></i> <span>Manage Users</span></a>                 
                 </li>
 
-                <li class="{{ Request::is('admin/sellers*') ? 'active' : ' ' }}">
-                    <a href="{{ route('sellers.index') }}" ><i class="la la-user"></i> <span>Manage Sellers</span></a>                 
+                <li class="{{ Request::is('admin/stuffs*') ? 'active' : ' ' }}">
+                    <a href="{{ route('stuffs.index') }}" ><i class="la la-user"></i> <span>Manage Stuffs</span></a>                 
                 </li>
                 
 

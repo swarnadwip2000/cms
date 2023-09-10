@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-Demo | Profile
+{{env('APP_NAME')}} | Profile
 @endsection
 @push('styles')
 @endpush

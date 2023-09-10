@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Seller Details - {{ env('APP_NAME') }}
+    All User Details - {{ env('APP_NAME') }}
 @endsection
 @push('styles')
     <style>
@@ -21,15 +21,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Sellers Information</h3>
+                        <h3 class="page-title">Users Information</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('sellers.index') }}">Sellers</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('sellers.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Seller</a>
+                        <a href="{{ route('users.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            User</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Sellers Details</h4>
+                                <h4 class="mb-0">Users Details</h4>
                             </div>
 
                         </div>
@@ -53,38 +53,34 @@
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Phone</th>
-                                    <th>City</th>
-                                    <th>State</th>
                                     <th>Address</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($sellers as $key => $seller)
+                                @foreach ($users as $key => $user)
                                     <tr>
-                                        <td>{{ $seller->name }}</td>
-                                        <td>{{ $seller->email }}</td>
-                                        <td>{{ $seller->phone }}</td>
-                                        <td>{{ $seller->city }}</td>
-                                        <td>{{ $seller->country }}</td>
-                                        <td>{{ $seller->address }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td>{{ $user->address }}</td>
                                         <td>
                                             <div class="button-switch">
                                                 <input type="checkbox" id="switch-orange" class="switch toggle-class"
-                                                    data-id="{{ $seller['id'] }}"
-                                                    {{ $seller['status'] ? 'checked' : '' }} />
+                                                    data-id="{{ $user['id'] }}"
+                                                    {{ $user['status'] ? 'checked' : '' }} />
                                                 <label for="switch-orange" class="lbl-off"></label>
                                                 <label for="switch-orange" class="lbl-on"></label>
                                             </div>
                                         </td>
                                         <td>
-                                            <a title="Edit Seller" data-route=""
-                                                href="{{ route('sellers.edit', $seller->id) }}"><i
+                                            <a title="Edit User" data-route=""
+                                                href="{{ route('users.edit', $user->id) }}"><i
                                                     class="fas fa-edit"></i></a> &nbsp;&nbsp;
 
-                                            <a title="Delete Seller"
-                                                data-route="{{ route('sellers.delete', $seller->id) }}"
+                                            <a title="Delete User"
+                                                data-route="{{ route('users.delete', $user->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -108,11 +104,11 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [6, 7]
+                        "targets": [4, 5]
                     },
                     {
                         "orderable": true,
-                        "targets": [0, 1, 2, 3, 4, 5]
+                        "targets": [0, 1, 2, 3]
                     }
                 ]
             });
@@ -123,7 +119,7 @@
         $(document).on('click', '#delete', function(e) {
             swal({
                     title: "Are you sure?",
-                    text: "To delete this seller.",
+                    text: "To delete this user.",
                     type: "warning",
                     confirmButtonText: "Yes",
                     showCancelButton: true
@@ -149,7 +145,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{ route('sellers.change-status') }}',
+                url: '{{ route('users.change-status') }}',
                 data: {
                     'status': status,
                     'user_id': user_id

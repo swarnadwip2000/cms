@@ -1658,8 +1658,8 @@ button.bg-danger:hover {
 }
 
 .btn-primary {
-    background-color: #11a4f3;
-    border: 1px solid #11a4f3;
+    background-color: #851eccdb;
+    border: 1px solid #851eccdb;
     color: #fff !important;
 }
 
@@ -2900,7 +2900,7 @@ input[type="file"].form-control {
     cursor: pointer;
     color: #fff;
     font-size: 24px;
-    background-color: #11a4f3;
+    background-color: #851eccdb;
     -webkit-animation: spin 4s linear infinite;
     -moz-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;
@@ -3310,8 +3310,8 @@ input[type="file"].form-control {
 
 .sidebar,
 .two-col-bar {
-    background-color: #34444c;
-    border-right: 1px solid transparent;
+    background-color: #7fffd4;
+    border-right: 1px solid #7fffd4;
     margin-top: 0;
     position: fixed;
     top: 60px;
@@ -3382,11 +3382,12 @@ input[type="file"].form-control {
 
 .sidebar .sidebar-menu ul li.menu-title,
 .two-col-bar .sidebar-menu ul li.menu-title {
-    color: #ebebeb;
-    font-size: 14px;
+    color: #0b0c0b;
+    font-size: 16px;
     opacity: 1;
     padding: 5px 15px;
     white-space: nowrap;
+    font-weight: 400;
 }
 
 .sidebar .sidebar-menu ul li.menu-title a,
@@ -3407,7 +3408,7 @@ input[type="file"].form-control {
     justify-content: flex-start;
     position: relative;
     font-size: 15px;
-    color: #b7c0cd;
+    color: #101010;
     height: auto;
     -webkit-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
@@ -3417,7 +3418,7 @@ input[type="file"].form-control {
 
 .sidebar .sidebar-menu ul li a:hover,
 .two-col-bar .sidebar-menu ul li a:hover {
-    color: rgb(43 233 9 / 36%);
+    color: rgba(63, 118, 145, 0.67);
 }
 
 .sidebar .sidebar-menu ul li a span,
@@ -3545,7 +3546,7 @@ input[type="file"].form-control {
 .sidebar .sidebar-menu ul li.active a,
 .two-col-bar .sidebar-menu ul li.active a {
     color: #fff;
-    background-color: rgb(43 233 9 / 36%);
+    background-color: rgba(28, 86, 18, 0.36);
 }
 
 .sidebar .sidebar-menu ul ul,
@@ -6365,7 +6366,7 @@ input[type="file"].form-control {
 
 [data-layout-mode="orange"] body .header {
     background: #ff9b44;
-    background: linear-gradient(to right, #55ce63 0%, #1f1f1f 100%);
+    background: linear-gradient(to right, #fff 0%, #fff 100%);
 }
 
 [data-layout-mode="orange"] body .header .header-left .logo {
@@ -6374,15 +6375,15 @@ input[type="file"].form-control {
 }
 
 [data-layout-mode="orange"] body .header .user-menu.nav > li > a {
-    color: #fff;
+    color: #090909;
 }
 
 [data-layout-mode="orange"] body .header #toggle_btn .bar-icon span {
-    background-color: #fff;
+    background-color: #090909;
 }
 
 [data-layout-mode="orange"] body .header .page-title-box h3 {
-    color: #fff;
+    color: #090909;
 }
 
 [data-layout-mode="orange"] body .header .header-left .logo2 {
@@ -9025,8 +9026,8 @@ textarea.form-control {
 }
 
 .add-btn {
-    background-color: #12a2ed;
-    border: 1px solid #12a2ed;
+    background-color: #851eccdb;
+    border: 1px solid #851eccdb;
     color: #fff;
     float: right;
     font-weight: 500;

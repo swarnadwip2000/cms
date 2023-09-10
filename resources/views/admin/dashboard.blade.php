@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    Dashboard - Demo admin
+    Dashboard - {{env('APP_NAME')}} admin
 @endsection
 @push('styles')
 @endpush
@@ -28,7 +28,7 @@
                             <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
                             <div class="dash-widget-info">
                                 <h3>112</h3>
-                                <span>Total Products</span>
+                                <span>Total Projects</span>
                             </div>
                         </div>
                     </div>
@@ -39,32 +39,32 @@
                             <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
                             <div class="dash-widget-info">
                                 <h3>44</h3>
-                                <span>Total Categories</span>
+                                <span>Total Leads</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <a href="{{ route('sellers.index') }}" style="color: black">
+                    <a href="{{ route('stuffs.index') }}" style="color: black">
                     <div class="card dash-widget">
                         <div class="card-body">
                             <span class="dash-widget-icon"><i class="fa fa-users"></i></span>
                             <div class="dash-widget-info">
-                                <h3>{{ $count['seller'] }}</h3>
-                                <span>Total Sellers</span>
+                                <h3>{{ $count['stuff'] }}</h3>
+                                <span>Total Stuffs</span>
                             </div>
                         </div>
                     </div>
                     </a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                    <a href="{{ route('customers.index') }}" style="color: black">
+                    <a href="{{ route('users.index') }}" style="color: black">
                         <div class="card dash-widget">
                             <div class="card-body">
                                 <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
                                 <div class="dash-widget-info">
-                                    <h3>{{ $count['customer'] }}</h3>
-                                    <span>Total Customer</span>
+                                    <h3>{{ $count['user'] }}</h3>
+                                    <span>Total User</span>
                                 </div>
                             </div>
                         </div>
