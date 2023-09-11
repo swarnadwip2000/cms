@@ -34,15 +34,17 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                    <a href="{{route('leads.index')}}" style="color: black">
                     <div class="card dash-widget">
                         <div class="card-body">
-                            <span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
+                            <span class="dash-widget-icon"><i class="fa fa-bullhorn"></i></span>
                             <div class="dash-widget-info">
-                                <h3>44</h3>
+                                <h3>{{$count['lead']}}</h3>
                                 <span>Total Leads</span>
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                     <a href="{{ route('stuffs.index') }}" style="color: black">

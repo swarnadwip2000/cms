@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LeadManagementController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StuffController;
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     Route::resources([
         'users' => UserController::class,
         'stuffs' => StuffController::class,
+        'leads' => LeadManagementController::class,
     ]);
     //  users Routes
     Route::prefix('users')->group(function () {
@@ -55,10 +57,16 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     });
     Route::get('/changeUserstatus', [UserController::class, 'changeUsersStatus'])->name('users.change-status');
 
-    // Seller Routes
+    // Stuff Routes
     Route::get('/changeStaffstatus', [StuffController::class, 'changeStuffsStatus'])->name('stuffs.change-status');
     Route::prefix('stuffs')->group(function () {
         Route::get('/staff-delete/{id}', [StuffController::class, 'delete'])->name('stuffs.delete');
     });
+
+    // leads route
+    Route::prefix('leads')->group(function () {
+        Route::get('/leads-delete/{id}', [LeadManagementController::class, 'delete'])->name('leads.delete');
+    });
+    Route::get('/leads-assign', [LeadManagementController::class, 'leadsAssign'])->name('leads.assign');
 
 });

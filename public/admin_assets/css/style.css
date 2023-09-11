@@ -3407,13 +3407,14 @@ input[type="file"].form-control {
 .two-col-bar .sidebar-menu ul li a {
     justify-content: flex-start;
     position: relative;
-    font-size: 15px;
+    font-size: 14px;
     color: #101010;
     height: auto;
     -webkit-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 8px 15px;
+    font-weight: 100;
 }
 
 .sidebar .sidebar-menu ul li a:hover,
@@ -11485,7 +11486,7 @@ button.close {
 /* End Toogle   */
 
 .submit-btn {
-    background: #008000bf;
+    background: #963dd3;
     border: 0;
     border-radius: 2px;
     color: #fff;
