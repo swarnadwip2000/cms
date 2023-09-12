@@ -7,7 +7,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class LeadManagementController extends Controller
+class ProjectManagementControlller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class LeadManagementController extends Controller
      */
     public function index()
     {
-        $leads = Project::where('type', 2)->orderBy('id', 'desc')->get();
+        $projects = Project::where('type', 1)->orderBy('id', 'desc')->get();
         $stuffs = User::role('STAFF')->where('status', 1)->orderBy('name', 'asc')->get();
-        return view('admin.leads.list')->with(compact('stuffs','leads'));
+        return view('admin.projects.list')->with(compact('stuffs','projects'));
     }
 
     /**
@@ -29,7 +29,7 @@ class LeadManagementController extends Controller
     public function create()
     {
         $stuffs = User::role('STAFF')->where('status', 1)->orderBy('name', 'asc')->get();
-        return view('admin.leads.create')->with(compact('stuffs'));
+        return view('admin.projects.create')->with(compact('stuffs'));
     }
 
     /**
@@ -48,16 +48,16 @@ class LeadManagementController extends Controller
             'client_phone' => 'required',
         ]);
 
-        $leads = new Project();
-        $leads->project_id = rand(0000000,999999999);
-        $leads->stuff_id = $request->stuff_id;
-        $leads->client_name = $request->client_name;
-        $leads->client_email = $request->client_email;
-        $leads->client_address = $request->client_address;
-        $leads->client_phone = $request->client_phone;
-        $leads->type = 2;
-        $leads->save();
-        return redirect()->route('leads.index')->with('message', 'Lead added successfully.');
+        $projects = new Project();
+        $projects->project_id = rand(0000000,999999999);
+        $projects->stuff_id = $request->stuff_id;
+        $projects->client_name = $request->client_name;
+        $projects->client_email = $request->client_email;
+        $projects->client_address = $request->client_address;
+        $projects->client_phone = $request->client_phone;
+        $projects->type = 1;
+        $projects->save();
+        return redirect()->route('projects.index')->with('message', 'Project added successfully.');
     }
 
     /**
@@ -80,8 +80,8 @@ class LeadManagementController extends Controller
     public function edit($id)
     {
         $stuffs = User::role('STAFF')->where('status', 1)->orderBy('name', 'asc')->get();
-        $lead = Project::findOrFail($id);
-        return view('admin.leads.edit')->with(compact('stuffs', 'lead'));
+        $project = Project::findOrFail($id);
+        return view('admin.projects.edit')->with(compact('stuffs', 'project'));
     }
 
     /**
@@ -101,14 +101,14 @@ class LeadManagementController extends Controller
             'client_phone' => 'required',
         ]);
 
-        $leads = Project::findOrFail($id);
-        $leads->stuff_id = $request->stuff_id;
-        $leads->client_name = $request->client_name;
-        $leads->client_email = $request->client_email;
-        $leads->client_address = $request->client_address;
-        $leads->client_phone = $request->client_phone;
-        $leads->save();
-        return redirect()->route('leads.index')->with('message', 'Lead updated successfully.');
+        $projects = Project::findOrFail($id);
+        $projects->stuff_id = $request->stuff_id;
+        $projects->client_name = $request->client_name;
+        $projects->client_email = $request->client_email;
+        $projects->client_address = $request->client_address;
+        $projects->client_phone = $request->client_phone;
+        $projects->save();
+        return redirect()->route('projects.index')->with('message', 'Projects updated successfully.');
     }
 
     /**
@@ -125,19 +125,15 @@ class LeadManagementController extends Controller
     public function delete($id)
     {
         Project::where('id', $id)->delete();
-        return redirect()->back()->with('error', 'Leads has been deleted');
+        return redirect()->back()->with('error', 'Project has been deleted');
     }
 
-    public function leadsAssign(Request $request)
+    public function projectsAssign(Request $request)
     {
+        // return $request->all();
         if ($request->ajax()) {
-            Project::where('id', $request->lead_id)->update(['stuff_id'=> $request->stuff_id]);
+            Project::where('id', $request->project_id)->update(['stuff_id'=> $request->stuff_id]);
             return response()->json(['status'=>true, 'message' => 'Stuff assigned successfully.']);
         }
-    }
-    public function assignToProject($id)
-    {
-        Project::where('id', $id)->update(['type'=>1]);
-        return redirect()->route('projects.index')->with('message', 'Leads has been assigned as a project.');
     }
 }

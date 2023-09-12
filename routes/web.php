@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LeadManagementController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProjectManagementControlller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StuffController;
 /*
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         'users' => UserController::class,
         'stuffs' => StuffController::class,
         'leads' => LeadManagementController::class,
+        'projects' => ProjectManagementControlller::class
     ]);
     //  users Routes
     Route::prefix('users')->group(function () {
@@ -66,7 +68,15 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     // leads route
     Route::prefix('leads')->group(function () {
         Route::get('/leads-delete/{id}', [LeadManagementController::class, 'delete'])->name('leads.delete');
+        Route::get('/assign-to-project/{id}', [LeadManagementController::class, 'assignToProject'])->name('leads.assign-project');
+
+    });
+    // projects route
+    Route::prefix('projects')->group(function () {
+        Route::get('/projects-delete/{id}', [ProjectManagementControlller::class, 'delete'])->name('projects.delete');
+
     });
     Route::get('/leads-assign', [LeadManagementController::class, 'leadsAssign'])->name('leads.assign');
+    Route::get('/projects-assign', [ProjectManagementControlller::class, 'projectsAssign'])->name('projects.assign');
 
 });

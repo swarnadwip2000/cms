@@ -36,7 +36,9 @@
                 <li class="{{ Request::is('admin/leads*') ? 'active' : ' ' }}">
                     <a href="{{ route('leads.index') }}" ><i class="la la-bullhorn"></i> <span>Lead Management</span></a>
                 </li>
-
+                <li class="{{ Request::is('admin/projects*') ? 'active' : ' ' }}">
+                    <a href="{{ route('projects.index') }}" ><i class="la la-bullhorn"></i> <span>Project Management</span></a>
+                </li>
 
                 {{-- <li class="{{ Request::is('admin/members*') ? 'active' : ' ' }}">
                     <a href="{{ route('user.index') }}"><i class="la la-users"></i> <span>Members</span></a>

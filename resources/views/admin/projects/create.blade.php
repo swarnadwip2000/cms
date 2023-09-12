@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-{{env('APP_NAME')}} | Create Lead
+{{env('APP_NAME')}} | Create Project
 @endsection
 @push('styles')
 @endpush
@@ -15,13 +15,13 @@
                 <div class="col">
                     <h3 class="page-title">Create</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('leads.index') }}">Leads</a></li>
-                        <li class="breadcrumb-item active">Create Lead</li>
+                        <li class="breadcrumb-item"><a href="{{ route('projects.index') }}">Projects</a></li>
+                        <li class="breadcrumb-item active">Create Project</li>
                     </ul>
                 </div>
                 <div class="col-auto float-end ms-auto">
                     {{-- <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_group"><i
-                            class="fa fa-plus"></i> Add Lead</a> --}}
+                            class="fa fa-plus"></i> Add Project</a> --}}
                 </div>
             </div>
         </div>
@@ -31,11 +31,11 @@
                 <div class="card-title">
                     <div class="row">
                     <div class="col-xl-12 mx-auto">
-                        <h6 class="mb-0 text-uppercase">Create A Lead</h6>
+                        <h6 class="mb-0 text-uppercase">Create A Project</h6>
                         <hr>
                         <div class="card border-0 border-4">
                             <div class="card-body">
-                                <form action="{{ route('leads.store') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('projects.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="border p-4 rounded">
                                         <div class="row">

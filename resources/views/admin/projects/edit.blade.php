@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    {{ env('APP_NAME') }} | Edit Lead Details
+    {{ env('APP_NAME') }} | Edit Project Details
 @endsection
 @push('styles')
 @endpush
@@ -15,13 +15,13 @@
                     <div class="col">
                         <h3 class="page-title">Edit Details</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('leads.index') }}">Leads</a></li>
-                            <li class="breadcrumb-item active">Edit Lead Details</li>
+                            <li class="breadcrumb-item"><a href="{{ route('projects.index') }}">Projects</a></li>
+                            <li class="breadcrumb-item active">Edit Project Details</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
                         {{-- <a href="#" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#add_group"><i
-                            class="fa fa-plus"></i> Add Lead</a> --}}
+                            class="fa fa-plus"></i> Add Project</a> --}}
                     </div>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-xl-12 mx-auto">
-                                <h6 class="mb-0 text-uppercase">Edit A Lead</h6>
+                                <h6 class="mb-0 text-uppercase">Edit A Project</h6>
                                 <hr>
                                 <div class="card border-0 border-4">
                                     <div class="card-body">
-                                        <form action="{{ route('leads.update', $lead->id) }}" method="POST"
+                                        <form action="{{ route('projects.update', $project->id) }}" method="POST"
                                             enctype="multipart/form-data">
                                             @method('PUT')
                                             @csrf
@@ -45,7 +45,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label">Client Name
                                                             <span style="color: red;">*</span></label>
                                                         <input type="text" name="client_name" id=""
-                                                            class="form-control" value="{{ $lead['client_name'] }}"
+                                                            class="form-control" value="{{ $project['client_name'] }}"
                                                             placeholder="Enter Client Name">
                                                         @if ($errors->has('client_name'))
                                                             <div class="error" style="color:red;">
@@ -56,7 +56,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label">Client Email
                                                             <span style="color: red;">*</span></label>
                                                         <input type="text" name="client_email" id=""
-                                                            class="form-control" value="{{ $lead['client_email'] }}"
+                                                            class="form-control" value="{{ $project['client_email'] }}"
                                                             placeholder="Enter Client Email">
                                                         @if ($errors->has('client_email'))
                                                             <div class="error" style="color:red;">
@@ -67,7 +67,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label">Client Phone
                                                             <span style="color: red;">*</span></label>
                                                         <input type="text" name="client_phone" id=""
-                                                            class="form-control" value="{{ $lead['client_phone'] }}"
+                                                            class="form-control" value="{{ $project['client_phone'] }}"
                                                             placeholder="Enter Client Phone Number">
                                                         @if ($errors->has('client_phone'))
                                                             <div class="error" style="color:red;">
@@ -79,7 +79,7 @@
                                                         <label for="inputEnterYourName" class="col-form-label">Client
                                                             Address <span style="color: red;">*</span></label>
                                                         <input type="text" name="client_address" id=""
-                                                            class="form-control" value="{{ $lead['client_address'] }}"
+                                                            class="form-control" value="{{ $project['client_address'] }}"
                                                             placeholder="Client Address">
                                                         @if ($errors->has('client_address'))
                                                             <div class="error" style="color:red;">
@@ -94,8 +94,8 @@
                                                             <option value="">Select a stuff</option>
                                                             @foreach ($stuffs as $stuff)
                                                                 <option value="{{ $stuff['id'] }}"
-                                                                    data-id="{{ $lead->id }}"
-                                                                    {{ $stuff['id'] == $lead['stuff_id'] ? 'selected' : '' }}>
+                                                                    data-id="{{ $project->id }}"
+                                                                    {{ $stuff['id'] == $project['stuff_id'] ? 'selected' : '' }}>
                                                                     {{ $stuff['name'] }} ({{ $stuff['email'] }})</option>
                                                             @endforeach
                                                         </select>

@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('title')
-    All Lead Details - {{ env('APP_NAME') }}
+    All Project Details - {{ env('APP_NAME') }}
 @endsection
 @push('styles')
     <style>
@@ -21,15 +21,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Leads Management</h3>
+                        <h3 class="page-title">Projects Management</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('leads.index') }}">Leads</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('projects.index') }}">Projects</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('leads.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Lead</a>
+                        <a href="{{ route('projects.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Project</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Leads Management</h4>
+                                <h4 class="mb-0">Projects Management</h4>
                             </div>
 
                         </div>
@@ -60,33 +60,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($leads as $key => $lead)
+                                @foreach ($projects as $key => $project)
                                     <tr>
-                                        <td>#{{$lead->project_id}}</td>
-                                        <td>{{ $lead->client_name }}</td>
-                                        <td>{{ $lead->client_email }}</td>
-                                        <td>{{ $lead->client_phone }}</td>
-                                        <td>{{ $lead->client_address }}</td>
+                                        <td>#{{$project->project_id}}</td>
+                                        <td>{{ $project->client_name }}</td>
+                                        <td>{{ $project->client_email }}</td>
+                                        <td>{{ $project->client_phone }}</td>
+                                        <td>{{ $project->client_address }}</td>
                                         <td>
-                                            <input type="hidden" name="id" id="lead_id" value="{{$lead->id}}">
+                                            <input type="hidden" name="id" id="project_id" value="{{$project->id}}">
                                             <select name="stuff_id" id="stuff_id" class="form-control">
                                                 <option value="">Select a stuff</option>
                                                 @foreach ($stuffs as $stuff)
-                                                    <option value="{{ $stuff['id'] }}" data-id=""
-                                                        {{ $stuff['id'] == $lead['stuff_id'] ? 'selected' : '' }}>
+                                                    <option value="{{ $stuff['id'] }}" data-id="{{$project->id}}"
+                                                        {{ $stuff['id'] == $project['stuff_id'] ? 'selected' : '' }}>
                                                         {{ $stuff['name'] }} ({{ $stuff['email'] }})</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td>
-                                            <a title="Edit Lead" data-route=""
-                                                href="{{ route('leads.edit', $lead->id) }}"><i class="fas fa-edit"></i></a>
+                                            <a title="Edit Project" data-route=""
+                                                href="{{ route('projects.edit', $project->id) }}"><i class="fas fa-edit"></i></a>
                                             &nbsp;&nbsp;
 
-                                            <a title="Delete Lead" data-route="{{ route('leads.delete', $lead->id) }}"
+                                            <a title="Delete Project" data-route="{{ route('projects.delete', $project->id) }}"
                                                 href="javascipt:void(0);" id="delete"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;
-                                                <a title="Assign to project" data-route="{{ route('leads.assign-project', $lead->id) }}"
-                                                    href="javascipt:void(0);" id="project"><i class="fa fa-shield"></i></a>
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -124,7 +123,7 @@
         $(document).on('click', '#delete', function(e) {
             swal({
                     title: "Are you sure?",
-                    text: "To delete this lead.",
+                    text: "To delete this project.",
                     type: "warning",
                     confirmButtonText: "Yes",
                     showCancelButton: true
@@ -166,7 +165,7 @@
     <script>
         $('#stuff_id').on('change', function() {
             var stuff_id = $(this).val();
-            var lead_id = $('#lead_id').val();
+            var project_id = $('#project_id').val();
             if (stuff_id == '') {
                 toastr.error('Please select a stuff.')
             } else {
@@ -182,10 +181,10 @@
                         $.ajax({
                             type: "GET",
                             dataType: "json",
-                            url: '{{ route('leads.assign') }}',
+                            url: '{{ route('projects.assign') }}',
                             data: {
                                 'stuff_id': stuff_id,
-                                'lead_id' : lead_id
+                                'project_id' : project_id
                             },
                             success: function(resp) {
                                 console.log(resp.success)
