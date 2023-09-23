@@ -17,7 +17,7 @@ class AuthController extends Controller
             return view('admin.auth.login');
         }
     }
-    
+
     public function loginCheck(Request $request)
     {
         $request->validate([
@@ -30,6 +30,8 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->select('id', 'email', 'status')->first();
             if ($user->hasRole('ADMIN') && $user->status == 1) {
                 return redirect()->route('admin.dashboard');
+            } else if($user->hasRole('STAFF') && $user->status == 1){
+                return redirect()->route('stuff.dashboard');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Email id & password was invalid!');
@@ -40,6 +42,12 @@ class AuthController extends Controller
     }
 
     public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('admin.login');
+    }
+
+    public function stuffLogout()
     {
         Auth::logout();
         return redirect()->route('admin.login');

@@ -10,6 +10,11 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectManagementControlller;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\StuffController;
+use App\Http\Controllers\Stuff\DashboardController as StuffDashboardController;
+use App\Http\Controllers\Stuff\LeadManagementController as StuffLeadManagementController;
+use App\Http\Controllers\Stuff\ProfileController as StuffProfileController;
+use App\Http\Controllers\Stuff\ProjectManagementControlller as StuffProjectManagementControlller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,5 +83,31 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
     });
     Route::get('/leads-assign', [LeadManagementController::class, 'leadsAssign'])->name('leads.assign');
     Route::get('/projects-assign', [ProjectManagementControlller::class, 'projectsAssign'])->name('projects.assign');
+
+});
+
+
+Route::group(['middleware' => ['stuff'], 'prefix'=>'stuff'], function () {
+    Route::get('dashboard', [StuffDashboardController::class, 'index'])->name('stuff.dashboard');
+    Route::get('profile', [StuffProfileController::class, 'index'])->name('stuff.profile');
+    Route::post('profile/update', [StuffProfileController::class, 'profileUpdate'])->name('stuff.profile.update');
+    Route::get('logout', [AuthController::class, 'stuffLogout'])->name('stuff.logout');
+
+
+    Route::prefix('password')->group(function () {
+        Route::get('/', [StuffProfileController::class, 'password'])->name('stuff.password'); // password change
+        Route::post('/update', [StuffProfileController::class, 'passwordUpdate'])->name('stuff.password.update'); // password update
+    });
+
+    Route::resources([
+        'stuff-leads' => StuffLeadManagementController::class,
+        'stuff-projects' => StuffProjectManagementControlller::class
+    ]);
+
+    // leads route
+    Route::prefix('leads')->group(function () {
+        Route::get('/assign-to-project/{id}', [StuffLeadManagementController::class, 'assignToProject'])->name('stuff-leads.assign-project');
+
+    });
 
 });
