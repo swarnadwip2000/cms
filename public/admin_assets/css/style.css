@@ -649,7 +649,7 @@ h6 {
 body {
     font-family: circularstd, sans-serif;
     font-size: 15px;
-    color: #1f1f1f;
+    color: #ff0000;
     background-color: #f7f7f7;
     overflow-x: hidden;
 }
@@ -667,7 +667,13 @@ img {
     /* height: auto; */
     vertical-align: middle;
 }
-
+.header-left img {
+    max-width: 100%;
+    /* height: auto; */
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+}
 a {
     text-decoration: none;
     outline: none;
@@ -2465,7 +2471,7 @@ button.bg-danger:hover {
 }
 
 .page-wrapper .content .page-header .page-title {
-    color: #1f1f1f;
+    color: #0068a7;
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -2511,7 +2517,7 @@ button.bg-danger:hover {
 }
 
 .card .card-title {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 20px;
@@ -3310,8 +3316,8 @@ input[type="file"].form-control {
 
 .sidebar,
 .two-col-bar {
-    background-color: #7fffd4;
-    border-right: 1px solid #7fffd4;
+    background-color: #efefef;
+    border-right: 1px solid #efefef;
     margin-top: 0;
     position: fixed;
     top: 60px;
@@ -3407,14 +3413,13 @@ input[type="file"].form-control {
 .two-col-bar .sidebar-menu ul li a {
     justify-content: flex-start;
     position: relative;
-    font-size: 14px;
+    font-size: 15px;
     color: #101010;
     height: auto;
     -webkit-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
     padding: 8px 15px;
-    font-weight: 100;
 }
 
 .sidebar .sidebar-menu ul li a:hover,
@@ -3544,10 +3549,10 @@ input[type="file"].form-control {
     margin-left: auto;
 }
 
-.sidebar .sidebar-menu ul li.active a,
-.two-col-bar .sidebar-menu ul li.active a {
-    color: #fff;
-    background-color: rgba(28, 86, 18, 0.36);
+.sidebar .sidebar-menu ul li.active a, .two-col-bar .sidebar-menu ul li.active a {
+    color: #000;
+    background-color: #fff;
+    box-shadow: 0 5px 5px #ccc;
 }
 
 .sidebar .sidebar-menu ul ul,
@@ -7837,7 +7842,7 @@ th.fc-widget-header {
 }
 
 .page-title {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -8038,7 +8043,7 @@ textarea.form-control {
 
 .error-page {
     background-color: rgba(255, 155, 68, 0.2);
-    color: #1f1f1f;
+    color: #ff0000;
 }
 
 .error-page .main-wrapper {
@@ -8284,7 +8289,7 @@ textarea.form-control {
 }
 
 .time-list .dash-stats-list h4 {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 21px;
     font-weight: 700;
     line-height: 1.5;
@@ -8733,7 +8738,7 @@ textarea.form-control {
 }
 
 .account-page .main-wrapper .account-content .account-box label {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 5px;
@@ -8756,7 +8761,7 @@ textarea.form-control {
 
 .account-page .main-wrapper .account-content .account-box .account-btn {
     background: #ff9b44;
-    background: linear-gradient(to right, #10acff 0%, #1f1f1f 100%);
+    background: linear-gradient(to right, #0068a7 0%, #ff0000 100%);
     border: 0;
     display: block;
     font-size: 22px;
@@ -8820,7 +8825,7 @@ textarea.form-control {
     .account-box
     .form-group
     label {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 5px;
@@ -9113,7 +9118,7 @@ textarea.form-control {
 }
 
 .stats-info h6 {
-    color: #1f1f1f;
+    color: #ff0000;
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
@@ -9328,7 +9333,7 @@ textarea.form-control {
 }
 
 .kanban-cont .kanban-list .kanban-wrap .task-board-header a {
-    color: #1f1f1f;
+    color: #ff0000;
 }
 
 .kanban-cont .kanban-list .kanban-wrap .task-board-body {
@@ -11486,7 +11491,7 @@ button.close {
 /* End Toogle   */
 
 .submit-btn {
-    background: #963dd3;
+    background: #008000bf;
     border: 0;
     border-radius: 2px;
     color: #fff;

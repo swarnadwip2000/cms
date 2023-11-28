@@ -32,6 +32,8 @@ class AuthController extends Controller
                 return redirect()->route('admin.dashboard');
             } else if($user->hasRole('STAFF') && $user->status == 1){
                 return redirect()->route('stuff.dashboard');
+            }else if($user->hasRole('USER') && $user->status == 1){
+                return redirect()->route('user-projects.create');
             } else {
                 Auth::logout();
                 return redirect()->back()->with('error', 'Email id & password was invalid!');
@@ -48,6 +50,12 @@ class AuthController extends Controller
     }
 
     public function stuffLogout()
+    {
+        Auth::logout();
+        return redirect()->route('admin.login');
+    }
+
+    public function userLogout()
     {
         Auth::logout();
         return redirect()->route('admin.login');

@@ -14,6 +14,8 @@ use App\Http\Controllers\Stuff\DashboardController as StuffDashboardController;
 use App\Http\Controllers\Stuff\LeadManagementController as StuffLeadManagementController;
 use App\Http\Controllers\Stuff\ProfileController as StuffProfileController;
 use App\Http\Controllers\Stuff\ProjectManagementControlller as StuffProjectManagementControlller;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\User\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,5 +111,23 @@ Route::group(['middleware' => ['stuff'], 'prefix'=>'stuff'], function () {
         Route::get('/assign-to-project/{id}', [StuffLeadManagementController::class, 'assignToProject'])->name('stuff-leads.assign-project');
 
     });
+
+});
+
+Route::group(['middleware' => ['user'], 'prefix'=>'user'], function () {
+    Route::get('profile', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::post('profile/update', [UserProfileController::class, 'profileUpdate'])->name('user.profile.update');
+    Route::get('logout', [AuthController::class, 'userLogout'])->name('user.logout');
+
+
+    Route::prefix('password')->group(function () {
+        Route::get('/', [UserProfileController::class, 'password'])->name('user.password'); // password change
+        Route::post('/update', [UserProfileController::class, 'passwordUpdate'])->name('user.password.update'); // password update
+    });
+
+    Route::resources([
+        'user-projects' => ProjectController::class
+    ]);
+
 
 });
