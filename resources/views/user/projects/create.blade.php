@@ -1,6 +1,6 @@
 @extends('user.layouts.master')
 @section('title')
-{{env('APP_NAME')}} | Create Project
+{{env('APP_NAME')}} | User Information
 @endsection
 @push('styles')
 @endpush
@@ -15,8 +15,7 @@
                 <div class="col">
                     <h3 class="page-title">Create</h3>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('user-projects.index') }}">Projects</a></li>
-                        <li class="breadcrumb-item active">Create Project</li>
+                        <li class="breadcrumb-item"><a href="{{ route('user-projects.index') }}">User Information</a></li>
                     </ul>
                 </div>
                 <div class="col-auto float-end ms-auto">
@@ -31,7 +30,7 @@
                 <div class="card-title">
                     <div class="row">
                     <div class="col-xl-12 mx-auto">
-                        <h6 class="mb-0 text-uppercase">Create A Project</h6>
+                        {{-- <h6 class="mb-0 text-uppercase">Create A Project</h6> --}}
                         <hr>
                         <div class="card border-0 border-4">
                             <div class="card-body">
@@ -504,9 +503,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group first-cl">
                                             <p><label for="sel1">Any Visa Refusal?</label><span
-                                                    class="" id="visaRefusal"
+                                                    class=""
                                                     data-name="AnyVisaRefusal"><select
-                                                        class="form-control"
+                                                        class="form-control" id="visaRefusal"
                                                         required
                                                         data-parsley-required-message="Please select any visa refusal"
                                                          name="AnyVisaRefusal">

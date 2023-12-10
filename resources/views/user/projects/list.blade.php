@@ -1,6 +1,6 @@
-@extends('stuff.layouts.master')
+@extends('user.layouts.master')
 @section('title')
-    All Project Details - {{ env('APP_NAME') }}
+    All User Details - {{ env('APP_NAME') }}
 @endsection
 @push('styles')
     <style>
@@ -21,15 +21,14 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Projects Management</h3>
+                        <h3 class="page-title">User Management</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('stuff-projects.index') }}">Projects</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('user-projects.index') }}">User</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('stuff-projects.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Project</a>
+                        <a href="{{ route('user-projects.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Create Your Information</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +38,7 @@
                     <div class="card-title">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-0">Projects Management</h4>
+                                <h4 class="mb-0">User Information</h4>
                             </div>
 
                         </div>
@@ -55,24 +54,31 @@
                                     <th>Client Email</th>
                                     <th>Client Phone</th>
                                     <th>Client Address</th>
-                                    <th>Action</th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($projects as $key => $project)
                                     <tr>
                                         <td>#{{$project->project_id}}</td>
-                                        <td>{{ $project->client_name }}</td>
-                                        <td>{{ $project->client_email }}</td>
-                                        <td>{{ $project->client_phone }}</td>
-                                        <td>{{ $project->client_address }}</td>
+                                        <td>{{ $project->FirstName }} {{ $project->LastName }}</td>
+                                        <td>{{ $project->EnterEmail }}</td>
+                                        <td>{{ $project->EnterNumber }}</td>
+                                        <td>{{ $project->EnterCity ?? '' }}, {{ $project->EnterState ?? '' }}, {{ $project->CountryofResidence ?? '' }}</td>
 
                                         <td>
-                                            <a title="Edit Project" data-route=""
-                                                href="{{ route('stuff-projects.edit', $project->id) }}"><i class="fas fa-edit"></i></a>
-                                            &nbsp;&nbsp;
-
+                                           {{ $project->status }}
                                         </td>
+                                        <td>
+                                            <a title="View Project" data-route=""
+                                            href="{{route('user-projects.show', base64_encode($project->id))}}"><i class="fas fa-eye"></i></a>
+                                        </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -94,7 +100,7 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [ 5]
+                        "targets": [5,6]
                     },
                     {
                         "orderable": true,

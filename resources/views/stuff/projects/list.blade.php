@@ -28,8 +28,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('stuff-projects.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Project</a>
+                        {{-- <a href="{{ route('stuff-projects.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Project</a> --}}
                     </div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
                                     <th>Client Email</th>
                                     <th>Client Phone</th>
                                     <th>Client Address</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -62,14 +63,22 @@
                                 @foreach ($projects as $key => $project)
                                     <tr>
                                         <td>#{{$project->project_id}}</td>
-                                        <td>{{ $project->client_name }}</td>
-                                        <td>{{ $project->client_email }}</td>
-                                        <td>{{ $project->client_phone }}</td>
-                                        <td>{{ $project->client_address }}</td>
-
+                                        <td>{{ $project->FirstName }} {{ $project->LastName }}</td>
+                                        <td>{{ $project->EnterEmail }}</td>
+                                        <td>{{ $project->EnterNumber }}</td>
+                                        <td>{{ $project->EnterCity ?? '' }}, {{ $project->EnterState ?? '' }}, {{ $project->CountryofResidence ?? '' }}</td>
                                         <td>
-                                            <a title="Edit Project" data-route=""
-                                                href="{{ route('stuff-projects.edit', $project->id) }}"><i class="fas fa-edit"></i></a>
+                                            <input type="hidden" name="id" id="project_id" value="{{$project->id}}">
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="">Select a Status</option>
+                                                <option value="Pending" {{($project->status == 'Pending') ? 'Selected' : ''}}>Pending</option>
+                                                <option value="Accept" {{($project->status == 'Accept') ? 'Selected' : ''}}>Accept</option>
+                                                <option value="Delivered" {{($project->status == 'Delivered') ? 'Selected' : ''}}>Delivered</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <a title="Show Project" data-route=""
+                                                href="{{ route('stuff-projects.show', $project->id) }}"><i class="fas fa-eye"></i></a>
                                             &nbsp;&nbsp;
 
                                         </td>
@@ -94,7 +103,7 @@
                 "aaSorting": [],
                 "columnDefs": [{
                         "orderable": false,
-                        "targets": [ 5]
+                        "targets": [ 5, 6]
                     },
                     {
                         "orderable": true,
@@ -146,6 +155,46 @@
                         )
                     }
                 })
+        });
+    </script>
+    <script>
+        $('#status').on('change', function() {
+            var status = $(this).val();
+            var project_id = $('#project_id').val();
+            if (status == '') {
+                toastr.error('Please select a stuff.')
+            } else {
+                swal({
+                    title: "Are you sure?",
+                    text: "To assign.",
+                    type: "warning",
+                    confirmButtonText: "Yes",
+                    showCancelButton: true
+                })
+                .then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: '{{ route('stuff-projects.status') }}',
+                            data: {
+                                'project_id': project_id,
+                                'status' : status
+                            },
+                            success: function(resp) {
+                                console.log(resp.success)
+                            }
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        swal(
+                            'Cancelled',
+                            'Your stay here :)',
+                            'error'
+                        )
+                    }
+                })
+            }
+
         });
     </script>
 @endpush

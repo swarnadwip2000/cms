@@ -66,7 +66,8 @@ class ProjectManagementControlller extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::where('id', $id)->where(['type'=> 1, 'stuff_id'=>Auth::user()->id])->first();
+        return view('stuff.projects.view')->with(compact('project'));
     }
 
     /**
@@ -119,5 +120,12 @@ class ProjectManagementControlller extends Controller
         //
     }
 
+    public function statusChange(Request $request)
+    {
+        if ($request->ajax()) {
+           Project::where('id', $request->project_id)->update(['status' => $request->status]);
+           return response()->json(['status'=>true, 'message' => 'Status Updated successfully.']);
+        }
+    }
 
 }

@@ -36,6 +36,8 @@ Route::get('clear', function () {
 
 Route::get('/', [AuthController::class, 'login'])->name('admin.login');
 Route::post('/login-check', [AuthController::class, 'loginCheck'])->name('admin.login.check');  //login check
+Route::get('/register', [AuthController::class, 'register'])->name('admin.register');
+Route::post('/register-store', [AuthController::class, 'registerStore'])->name('admin.register.store');  //register store
 Route::post('forget-password', [ForgetPasswordController::class, 'forgetPassword'])->name('admin.forget.password');
 Route::post('change-password', [ForgetPasswordController::class, 'changePassword'])->name('admin.change.password');
 Route::get('forget-password/show', [ForgetPasswordController::class, 'forgetPasswordShow'])->name('admin.forget.password.show');
@@ -60,6 +62,8 @@ Route::group(['middleware' => ['admin'], 'prefix'=>'admin'], function () {
         'leads' => LeadManagementController::class,
         'projects' => ProjectManagementControlller::class
     ]);
+
+    Route::get('/status-change', [ProjectManagementControlller::class, 'statusChange'])->name('projects.status');
     //  users Routes
     Route::prefix('users')->group(function () {
         Route::get('/users-delete/{id}', [UserController::class, 'delete'])->name('users.delete');
@@ -105,6 +109,7 @@ Route::group(['middleware' => ['stuff'], 'prefix'=>'stuff'], function () {
         'stuff-leads' => StuffLeadManagementController::class,
         'stuff-projects' => StuffProjectManagementControlller::class
     ]);
+    Route::get('/status-change', [StuffProjectManagementControlller::class, 'statusChange'])->name('stuff-projects.status');
 
     // leads route
     Route::prefix('leads')->group(function () {

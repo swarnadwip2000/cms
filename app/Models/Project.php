@@ -18,4 +18,29 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function canadianWorkExperience()
+    {
+        return $this->hasMany(CanadianWorkExperience::class);
+    }
+
+    public function educationHistory()
+    {
+        return $this->hasMany(EducationHistory::class);
+    }
+
+    public function foreignWorkExperience()
+    {
+        return $this->hasMany(ForeignWorkExperience::class);
+    }
+
+    public function travelHistory()
+    {
+        return $this->hasMany(TravelHistory::class);
+    }
+
+    public function visaRefusals()
+    {
+        return $this->hasMany(VisaRefusal::class);
+    }
 }

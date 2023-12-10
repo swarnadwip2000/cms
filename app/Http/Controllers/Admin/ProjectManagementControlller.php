@@ -68,7 +68,8 @@ class ProjectManagementControlller extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.projects.view')->with(compact('project'));
     }
 
     /**
@@ -134,6 +135,14 @@ class ProjectManagementControlller extends Controller
         if ($request->ajax()) {
             Project::where('id', $request->project_id)->update(['stuff_id'=> $request->stuff_id]);
             return response()->json(['status'=>true, 'message' => 'Stuff assigned successfully.']);
+        }
+    }
+
+    public function statusChange(Request $request)
+    {
+        if ($request->ajax()) {
+           Project::where('id', $request->project_id)->update(['status' => $request->status]);
+           return response()->json(['status'=>true, 'message' => 'Status Updated successfully.']);
         }
     }
 }

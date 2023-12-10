@@ -24,7 +24,9 @@
 
         <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
         <ul class="nav user-menu">
-
+            <li class="nav-item dropdown has-arrow main-drop">
+                <a href="{{route('user-projects.index')}}"><button class="btn btn-primary">User Information List</button></a>
+            </li>
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                     <span class="user-img"> @if(Auth::user()->profile_picture) <img src="{{ Storage::url(Auth::user()->profile_picture) }}" alt=""> @else <img src="{{ asset("admin_assets/img/profiles/avatar-21.jpg") }}" alt=""> @endif

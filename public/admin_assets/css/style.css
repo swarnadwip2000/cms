@@ -431,7 +431,7 @@ video {
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 15px;
     vertical-align: baseline;
 }
 
@@ -588,7 +588,7 @@ h2 {
 
 h3 {
     font-weight: 500;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 0.5rem;
 }
 
@@ -649,7 +649,7 @@ h6 {
 body {
     font-family: circularstd, sans-serif;
     font-size: 15px;
-    color: #ff0000;
+    color: #0068a7;
     background-color: #f7f7f7;
     overflow-x: hidden;
 }
@@ -2517,7 +2517,7 @@ button.bg-danger:hover {
 }
 
 .card .card-title {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 20px;
@@ -5869,11 +5869,11 @@ input[type="file"].form-control {
 }
 
 [data-sidebar="gradient"] .sidebar {
-    background: linear-gradient(92.08deg, #ff0000 0%, #764ba2 100%);
+    background: linear-gradient(92.08deg, #0068a7 0%, #764ba2 100%);
 }
 
 [data-sidebar="gradient"] .sidebar-twocol.sidebar .sidebar-left {
-    background: linear-gradient(92.08deg, #ff0000 0%, #764ba2 100%);
+    background: linear-gradient(92.08deg, #0068a7 0%, #764ba2 100%);
 }
 
 [data-sidebar="gradient"]
@@ -7842,7 +7842,7 @@ th.fc-widget-header {
 }
 
 .page-title {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -8043,7 +8043,7 @@ textarea.form-control {
 
 .error-page {
     background-color: rgba(255, 155, 68, 0.2);
-    color: #ff0000;
+    color: #0068a7;
 }
 
 .error-page .main-wrapper {
@@ -8289,7 +8289,7 @@ textarea.form-control {
 }
 
 .time-list .dash-stats-list h4 {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 21px;
     font-weight: 700;
     line-height: 1.5;
@@ -8738,7 +8738,7 @@ textarea.form-control {
 }
 
 .account-page .main-wrapper .account-content .account-box label {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 5px;
@@ -8761,7 +8761,7 @@ textarea.form-control {
 
 .account-page .main-wrapper .account-content .account-box .account-btn {
     background: #ff9b44;
-    background: linear-gradient(to right, #0068a7 0%, #ff0000 100%);
+    background: linear-gradient(to right, #0068a7 0%, #0068a7 100%);
     border: 0;
     display: block;
     font-size: 22px;
@@ -8825,7 +8825,7 @@ textarea.form-control {
     .account-box
     .form-group
     label {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 5px;
@@ -9118,7 +9118,7 @@ textarea.form-control {
 }
 
 .stats-info h6 {
-    color: #ff0000;
+    color: #0068a7;
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
@@ -9333,7 +9333,7 @@ textarea.form-control {
 }
 
 .kanban-cont .kanban-list .kanban-wrap .task-board-header a {
-    color: #ff0000;
+    color: #0068a7;
 }
 
 .kanban-cont .kanban-list .kanban-wrap .task-board-body {
@@ -10864,7 +10864,7 @@ button.close {
 }
 
 .bg-sidebarcolor.bg-gradients {
-    background: linear-gradient(92.08deg, #ff0000 0%, #764ba2 100%);
+    background: linear-gradient(92.08deg, #0068a7 0%, #764ba2 100%);
 }
 
 .bg-sidebarcolor.bg-oranges {

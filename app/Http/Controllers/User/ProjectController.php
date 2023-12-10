@@ -21,7 +21,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-
+        $projects = Project::where('user_id', Auth::user()->id)->get();
+        return view('user.projects.list', compact('projects'));
     }
 
     /**
@@ -43,6 +44,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         // Assuming you have validated the incoming request data
+        $count = Project::where('TypeofApplication', $request->TypeofApplication)->count();
+        if ($count > 0) {
+            return redirect()->back()->with('error', 'You are already submitted same type of application ');
+        }
 
         // Create a new Project instance
        $project = new Project();
@@ -52,6 +57,7 @@ class ProjectController extends Controller
         $project->FirstName = $request->FirstName;
         $project->LastName = $request->LastName;
         $project->EnterEmail = $request->EnterEmail;
+        $project->EnterNumber = $request->EnterNumber;
         $project->CountryofResidence = $request->CountryofResidence;
         $project->EnterState = $request->EnterState;
         $project->EnterCity = $request->EnterCity;
@@ -101,94 +107,75 @@ class ProjectController extends Controller
         $project->save();
 
         // Create associated records in other tables
-        $this->createEducationHistories($project, $request->Level);
-        $this->createTravelHistories($project, $request->SCountry);
-        $this->createVisaRefusals($project, $request->Country);
-        $this->createCanadianWorkExperiences($project, $request->Occupation);
-        $this->createForeignWorkExperiences($project, $request->COccupation);
+        // $this->createEducationHistories($project, $request->Level);
+        // $this->createTravelHistories($project, $request->SCountry);
+        // $this->createVisaRefusals($project, $request->Country);
+        // $this->createCanadianWorkExperiences($project, $request->Occupation);
+        // $this->createForeignWorkExperiences($project, $request->COccupation);
 
+        if ($request->Level) {
+            foreach ($request->Level as $key=>$education) {
+                $educationHistory = new EducationHistory();
+                $educationHistory->project_id = $project->id;
+                $educationHistory->Level = $education;
+                $educationHistory->Field = $request->Field[$key] ?? '';
+                $educationHistory->Duration = $request->Duration[$key] ?? '';
+                $educationHistory->Location = $request->Location[$key] ?? '';
+                $educationHistory->Completed = $request->Completed[$key] ?? '';
+                $educationHistory->save();
+            }
+        }
+
+        if ($request->SCountry) {
+            foreach ($request->SCountry as $key=>$travelHistory) {
+                $travelHistoryEdu = new TravelHistory();
+                $travelHistoryEdu->project_id = $project->id;
+                $travelHistoryEdu->SCountry = $travelHistory;
+                $travelHistoryEdu->SYear = $request->SYear[$key] ?? '';
+                $travelHistoryEdu->save();
+            }
+        }
+
+        if ($request->Country) {
+            foreach ($request->Country as $key=>$visaRefusal) {
+                $visaRefusals = new VisaRefusal();
+                $visaRefusals->project_id = $project->id;
+                $visaRefusals->Country = $visaRefusal;
+                $visaRefusals->Year = $request->Year[$key] ?? '';
+                $visaRefusals->save();
+            }
+        }
+
+        if ($request->Occupation) {
+            foreach ($request->Occupation as $key=>$canadianWorkExperience) {
+                $canadianWorkExperiences = new CanadianWorkExperience();
+                $canadianWorkExperiences->project_id = $project->id;
+                $canadianWorkExperiences->Occupation = $canadianWorkExperience;
+                $canadianWorkExperiences->Cwduration = $request->Cwduration[$key] ?? '';
+                $canadianWorkExperiences->Province = $request->Province[$key] ?? '';
+                $canadianWorkExperiences->Type = $request->Type[$key] ?? '';
+                $canadianWorkExperiences->Status = $request->Status[$key] ?? '';
+                $canadianWorkExperiences->save();
+            }
+        }
+
+        if ($request->COccupation) {
+            foreach ($request->COccupation as $key=>$foreignWorkExperience) {
+                $foreignWorkExperiences = new ForeignWorkExperience();
+                $foreignWorkExperiences->project_id = $project->id;
+                $foreignWorkExperiences->COccupation = $foreignWorkExperience;
+                $foreignWorkExperiences->EDuration = $request->EDuration[$key] ?? '';
+                $foreignWorkExperiences->EProvince = $request->EProvince[$key] ?? '';
+                $foreignWorkExperiences->EType = $request->EType[$key] ?? '';
+                $foreignWorkExperiences->EStatus = $request->EStatus[$key] ?? '';
+                $foreignWorkExperiences->save();
+            }
+        }
         // Additional code or redirect as needed
-        return redirect()->route('projects.index')->with('success', 'Project created successfully');
+        return redirect()->back()->with('message', 'Your information submitted successfully.');
     }
 
-    protected function createEducationHistories($project, $educationHistories)
-    {
-        if ($educationHistories) {
-            foreach ($educationHistories as $key=>$education) {
-                EducationHistory::create([
-                    'project_id' => $project->id,
-                    'Level' => $education,
-                    'Field' => $educationHistories[$key]['Field'],
-                    'Duration' => $educationHistories[$key]['Duration'],
-                    'Location' => $educationHistories[$key]['Location'],
-                    'Completed' => $educationHistories[$key]['Completed'],
-                ]);
-            }
-        }
 
-    }
-
-    protected function createTravelHistories($project, $travelHistories)
-    {
-        if ($travelHistories) {
-            foreach ($travelHistories as $key=>$travel) {
-                TravelHistory::create([
-                    'project_id' => $project->id,
-                    'SCountry' => $travel,
-                    'SYear' => $travelHistories[$key]['SYear'],
-                ]);
-            }
-        }
-
-    }
-
-    protected function createVisaRefusals($project, $visaRefusals)
-    {
-        if ($visaRefusals) {
-            foreach ($visaRefusals as $key=>$visaRefusal) {
-                VisaRefusal::create([
-                    'project_id' => $project->id,
-                    'Country' => $visaRefusal,
-                    'Year' => $visaRefusals[$key]['Year'],
-                ]);
-            }
-        }
-
-    }
-
-    protected function createCanadianWorkExperiences($project, $canadianWorkExperiences)
-    {
-        if ($canadianWorkExperiences) {
-            foreach ($canadianWorkExperiences as $key=>$canadianWorkExperience) {
-                CanadianWorkExperience::create([
-                    'project_id' => $project->id,
-                    'Occupation' => $canadianWorkExperience,
-                    'Type' => $canadianWorkExperiences[$key]['Type'],
-                    'Status' => $canadianWorkExperiences[$key]['Status'],
-                    'Cwduration' => $canadianWorkExperiences[$key]['Cwduration'],
-                    'Province' => $canadianWorkExperiences[$key]['Province'],
-                ]);
-            }
-        }
-
-    }
-
-    protected function createForeignWorkExperiences($project, $foreignWorkExperiences)
-    {
-        if ($foreignWorkExperiences) {
-            foreach ($foreignWorkExperiences as $key=>$foreignWorkExperience) {
-                ForeignWorkExperience::create([
-                    'project_id' => $project->id,
-                    'COccupation' => $foreignWorkExperience,
-                    'EType' => $foreignWorkExperiences[$key]['EType'],
-                    'EStatus' => $foreignWorkExperiences[$key]['EStatus'],
-                    'EDuration' => $foreignWorkExperiences[$key]['EDuration'],
-                    'EProvince' => $foreignWorkExperiences[$key]['EProvince'],
-                ]);
-            }
-        }
-
-    }
 
 
     /**
@@ -199,7 +186,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = base64_decode($id);
+        $project = Project::findOrFail($id);
+        return view('user.projects.view')->with(compact('project'));
     }
 
     /**

@@ -10,7 +10,7 @@
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Login - {{env('APP_NAME')}} Admin Panel</title>
+    <title>Register - {{env('APP_NAME')}} Admin Panel</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/img/favicon.png') }}">
 
@@ -45,17 +45,42 @@
 
                 <div class="account-box">
                     <div class="account-wrapper">
-                        <h3 class="account-title">Login</h3>
-                        <p class="account-subtitle">Access to our dashboard</p>
+                        <h3 class="account-title">Register a new account</h3>
+                        {{-- <p class="account-subtitle">Access to our dashboard</p> --}}
 
-                        <form action="{{ route('admin.login.check') }}" method="POST">
+                        <form action="{{ route('admin.register.store') }}" method="POST">
                             @csrf
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="name" value="{{old('name')}}" id="inputEmailAddress"
+                                    placeholder="Name">
+                                @if ($errors->has('name'))
+                                    <div class="error" style="color:red;">{{ $errors->first('name') }}</div>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" name="phone" value="{{old('phone')}}" id="inputEmailAddress"
+                                    placeholder="Phone Number">
+                                @if ($errors->has('phone'))
+                                    <div class="error" style="color:red;">{{ $errors->first('phone') }}</div>
+                                @endif
+                            </div>
+
                             <div class="form-group">
                                 <label>Email Address</label>
                                 <input type="email" class="form-control" name="email" id="inputEmailAddress"
                                     placeholder="Email Address">
                                 @if ($errors->has('email'))
                                     <div class="error" style="color:red;">{{ $errors->first('email') }}</div>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="address" value="{{old('address')}}" id="inputEmailAddress"
+                                    placeholder="Address">
+                                @if ($errors->has('address'))
+                                    <div class="error" style="color:red;">{{ $errors->first('address') }}</div>
                                 @endif
                             </div>
                             <div class="form-group">
@@ -79,12 +104,10 @@
                                 @endif
                             </div>
                             <div class="form-group text-center">
-                                <button class="btn btn-primary account-btn" type="submit">Login</button>
+                                <button class="btn btn-primary account-btn" type="submit">Register</button>
                             </div>
-                            <div class="float-left">
-                                <p><a href="{{ route('admin.forget.password.show') }}">Forgot Password?</a></p>
-
-                                <p style="float: right;"><a href="{{ route('admin.register') }}">Create an account?</a></p>
+                            <div class="account-footer">
+                                <p><a href="{{ route('admin.login') }}">Already have an account?</a></p>
                             </div>
                         </form>
 

@@ -68,7 +68,8 @@ class LeadManagementController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.leads.view')->with(compact('project'));
     }
 
     /**

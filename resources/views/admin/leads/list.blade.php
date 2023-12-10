@@ -28,8 +28,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('leads.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Lead</a>
+                        {{-- <a href="{{ route('leads.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Lead</a> --}}
                     </div>
                 </div>
             </div>
@@ -63,10 +63,10 @@
                                 @foreach ($leads as $key => $lead)
                                     <tr>
                                         <td>#{{$lead->project_id}}</td>
-                                        <td>{{ $lead->client_name }}</td>
-                                        <td>{{ $lead->client_email }}</td>
-                                        <td>{{ $lead->client_phone }}</td>
-                                        <td>{{ $lead->client_address }}</td>
+                                        <td>{{ $lead->FirstName }} {{ $lead->LastName }}</td>
+                                        <td>{{ $lead->EnterEmail }}</td>
+                                        <td>{{ $lead->EnterNumber }}</td>
+                                        <td>{{ $lead->EnterCity ?? '' }}, {{ $lead->EnterState ?? '' }}, {{ $lead->CountryofResidence ?? '' }}</td>
                                         <td>
                                             <input type="hidden" name="id" id="lead_id" value="{{$lead->id}}">
                                             <select name="stuff_id" id="stuff_id" class="form-control">
@@ -79,8 +79,8 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <a title="Edit Lead" data-route=""
-                                                href="{{ route('leads.edit', $lead->id) }}"><i class="fas fa-edit"></i></a>
+                                            <a title="Show Lead" data-route=""
+                                                href="{{ route('leads.show', $lead->id) }}"><i class="fas fa-eye"></i></a>
                                             &nbsp;&nbsp;
 
                                             <a title="Delete Lead" data-route="{{ route('leads.delete', $lead->id) }}"

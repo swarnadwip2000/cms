@@ -22,6 +22,8 @@ class CreateProjectsTable extends Migration
             $table->string('FirstName')->nullable();
             $table->string('LastName')->nullable();
             $table->string('EnterEmail')->nullable();
+            $table->string('EnterNumber')->nullable();
+            
             $table->string('CountryofResidence')->nullable();
             $table->string('EnterState')->nullable();
             $table->string('EnterCity')->nullable();

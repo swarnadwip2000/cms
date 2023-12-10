@@ -66,7 +66,8 @@ class LeadManagementController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::where('id', $id)->where(['type'=> 2, 'stuff_id'=>Auth::user()->id])->first();
+        return view('stuff.leads.view')->with(compact('project'));
     }
 
     /**

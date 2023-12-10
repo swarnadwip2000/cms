@@ -17,6 +17,32 @@ class AuthController extends Controller
             return view('admin.auth.login');
         }
     }
+    public function register()
+    {
+        return view('admin.auth.register');
+    }
+
+    public function registerStore(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix|unique:users,email',
+            'password' => 'required|min:8',
+            'phone' => 'required|numeric',
+            'address' => 'required',
+            'name' => 'required'
+        ]);
+
+        $data = new User();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        $data->password = bcrypt($request->password);
+        $data->status = true;
+        $data->save();
+        $data->assignRole('USER');
+        return redirect()->route('admin.login')->with('message', 'Your account has been created successfully');
+    }
 
     public function loginCheck(Request $request)
     {

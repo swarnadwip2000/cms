@@ -28,8 +28,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('stuff-leads.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
-                            Lead</a>
+                        {{-- <a href="{{ route('stuff-leads.create') }}" class="btn add-btn"><i class="fa fa-plus"></i> Add a
+                            Lead</a> --}}
                     </div>
                 </div>
             </div>
@@ -62,14 +62,14 @@
                                 @foreach ($leads as $key => $lead)
                                     <tr>
                                         <td>#{{$lead->project_id}}</td>
-                                        <td>{{ $lead->client_name }}</td>
-                                        <td>{{ $lead->client_email }}</td>
-                                        <td>{{ $lead->client_phone }}</td>
-                                        <td>{{ $lead->client_address }}</td>
+                                        <td>{{ $lead->FirstName }} {{ $lead->LastName }}</td>
+                                        <td>{{ $lead->EnterEmail }}</td>
+                                        <td>{{ $lead->EnterNumber }}</td>
+                                        <td>{{ $lead->EnterCity ?? '' }}, {{ $lead->EnterState ?? '' }}, {{ $lead->CountryofResidence ?? '' }}</td>
 
                                         <td>
-                                            <a title="Edit Lead" data-route=""
-                                                href="{{ route('stuff-leads.edit', $lead->id) }}"><i class="fas fa-edit"></i></a>
+                                            <a title="Show Lead" data-route=""
+                                                href="{{ route('stuff-leads.show', $lead->id) }}"><i class="fas fa-eye"></i></a>
                                             &nbsp;&nbsp;
                                                 <a title="Assign to project" data-route="{{ route('stuff-leads.assign-project', $lead->id) }}"
                                                     href="javascipt:void(0);" id="project"><i class="fa fa-shield"></i></a>
